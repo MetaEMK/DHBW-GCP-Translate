@@ -3,15 +3,18 @@ module github.com/metaemk/dhbw-gcp-translate
 go 1.22.0
 
 require (
+	cloud.google.com/go/translate v1.10.1
 	github.com/gin-contrib/cors v1.6.0
 	github.com/gin-gonic/gin v1.9.1
+	github.com/lib/pq v1.10.9
+	golang.org/x/text v0.14.0
+	google.golang.org/api v0.160.0
 )
 
 require (
 	cloud.google.com/go v0.112.0 // indirect
 	cloud.google.com/go/compute v1.23.3 // indirect
 	cloud.google.com/go/compute/metadata v0.2.3 // indirect
-	cloud.google.com/go/translate v1.10.1 // indirect
 	github.com/bytedance/sonic v1.11.2 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20230717121745-296ad89f973d // indirect
 	github.com/chenzhuoyu/iasm v0.9.1 // indirect
@@ -50,8 +53,6 @@ require (
 	golang.org/x/net v0.22.0 // indirect
 	golang.org/x/oauth2 v0.16.0 // indirect
 	golang.org/x/sys v0.18.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
-	google.golang.org/api v0.160.0 // indirect
 	google.golang.org/appengine v1.6.8 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240116215550-a9fa1716bcac // indirect
 	google.golang.org/grpc v1.61.0 // indirect

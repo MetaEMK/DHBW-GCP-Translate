@@ -4,15 +4,26 @@ import (
 	"context"
 
 	"cloud.google.com/go/translate"
+	"google.golang.org/api/option"
 )
 
+var client *translate.Client
 
-func NewTranslatorClient() (*translate.Client, error) {
-    ctx := context.Background()
-    client, err := translate.NewClient(ctx)
-    if err != nil {
-        println(err.Error())
+func GetTranslatorClient(ctx context.Context) *translate.Client {
+    return client
+}
+
+func CreateTranslatorClient(ctx context.Context, keyfilePath *string) error {
+    var cl *translate.Client
+    var err error
+
+    if keyfilePath == nil {
+        cl, err = translate.NewClient(ctx)
+    } else {
+        cl, err = translate.NewClient(ctx, option.WithCredentialsFile(*keyfilePath))
     }
 
-    return client, err
+    client = cl
+
+    return err
 }

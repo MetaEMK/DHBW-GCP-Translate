@@ -19,8 +19,6 @@ func CreateServer() *gin.Engine {
 
     apiGroup := r.Group("/api")
     apiGroup.POST("/translate", translateHandler)
-    apiGroup.GET("/supportedLanguages/:targetLang", getSupportedLanguagesHandler)
-    apiGroup.POST("/detect", detectLanguageHandler)
 
     return r
 }
