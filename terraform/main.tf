@@ -10,6 +10,6 @@ terraform {
 provider "google" {
   project = "cc2-translator"
   region  = "europe-west1"
-  zone    = "europe-west1-a"
+  zone    = "europe-west1-b"
 }
 
