@@ -12,8 +12,7 @@ import (
 
 func main() {
     ctx := context.Background()
-    str := "/home/jan/Downloads/cc2-translator-0aeb3bb8fb55.json"
-    err := config.CreateTranslatorClient(ctx, &str)
+    err := config.CreateTranslatorClient(ctx, "")
     if err != nil {
         panic(err.Error())
     }

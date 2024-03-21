@@ -7,3 +7,4 @@ db_username: postgres
 db_password: my_password
 db_name: translator
 db_instance_connection_name: cc2-translator:europe-north1:translator-database
+keyfile_path: ./keyfile.json
