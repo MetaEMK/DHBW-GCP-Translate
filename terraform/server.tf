@@ -8,7 +8,7 @@ resource "google_compute_instance" "translator" {
   machine_type = "e2-micro"
 
   metadata = {
-    ssh-keys: file("${var.SSH_KEY_PATH}/translator.pub")
+    ssh-keys: format("jan:%s", file("${var.SSH_KEY_PATH}/translator.pub"))
   }
 
   boot_disk {
