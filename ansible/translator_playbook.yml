@@ -9,26 +9,15 @@
         state: present
       notify: restart node exporter
 
-    # Tasks for server deployment
-    - name: Install Unzip
-      apt:
-        name: unzip
-        state: present
+    - name: Create Directory
+      ansible.builtin.file:
+        path: /opt/translator
+        state: directory
 
     - name: Download Translator Server
       get_url: 
-        url: 
-        dest: /tmp/translator.zip
-        mode: '0644'
-
-    - name: Unzip binary
-      unarchive:
-        src: /tmp/translator.zip
+        url: https://github.com/MetaEMK/DHBW-GCP-Translate/releases/download/testing/dhbw-gcp-translate
         dest: /opt/translator
-        remote_src: yes
-
-    - name: Gcloud init
-      notify: start translator server
 
   handlers:
     - name: restart node exporter
