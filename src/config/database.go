@@ -1,40 +1,37 @@
 package config
 
 import (
-	"fmt"
 	"os"
+
+	"gopkg.in/yaml.v2"
 )
 
-func GetDatabaseConnectionString() (string, error) {
-    hostname := os.Getenv("DB_HOSTNAME")
-    if hostname == "" {
-        hostname = "localhost"
-    }
-
-    port := os.Getenv("DB_PORT")
-    if port == "" {
-        port = "5432"
-    }
-
-    username := os.Getenv("DB_USERNAME")
-    if username == "" {
-        username = "postgres"
-    }
-
-    password := os.Getenv("DB_PASSWORD")  
-    if password == "" {
-        password = "your_password"
-        //return "", errors.New("Database password is required")
-    }
-
-    dbname := os.Getenv("DB_NAME")
-    if dbname == "" {
-        dbname = "postgres"  
-    }
-
-    connectionString := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
-        hostname, port, username, password, dbname)
-
-    return connectionString, nil
+type DatabaseConfig struct {
+    DBHostname string `yaml:"db_hostname"`
+    DBPort     string `yaml:"db_port"`
+    DBUsername string `yaml:"db_username"`
+    DBPassword string `yaml:"db_password"`
+    DBName     string `yaml:"db_name"`
+    DBInstanceConnectionName string `yaml:"db_instance_connection_name"`
 }
 
+func GetDatabaseConfig(configPath string) (DatabaseConfig, error) {
+    if configPath == "" {
+        configPath = "./config.yaml"
+    }
+
+    yamlFile, err := os.Open(configPath)
+    if err != nil {
+        return DatabaseConfig{}, err
+    }
+    defer yamlFile.Close()
+
+    var config DatabaseConfig
+
+    err = yaml.NewDecoder(yamlFile).Decode(&config)
+    if err != nil {
+        return DatabaseConfig{}, err
+    }
+
+    return config, nil
+}

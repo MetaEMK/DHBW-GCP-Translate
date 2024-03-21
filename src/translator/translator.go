@@ -15,6 +15,9 @@ func Translate(ctx context.Context, request model.TranslateRequest) (result mode
 
     result, entryFound, err := database.GetTranslation(ctx, request)
     if err != nil || entryFound{
+        if entryFound {
+            println("entry found")
+        }
         return
     }
 
