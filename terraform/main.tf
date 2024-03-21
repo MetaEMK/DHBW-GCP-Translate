@@ -7,9 +7,14 @@ terraform {
   }
 }
 
+locals {
+  REGION = "europe-north1"
+  ZONE   = "europe-north1-a"
+}
+
 provider "google" {
   project = "cc2-translator"
-  region  = "europe-west1"
-  zone    = "europe-west1-b"
+  region  = local.REGION
+  zone    = local.ZONE
 }
 

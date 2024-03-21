@@ -17,7 +17,7 @@ data "google_compute_instance" "translator_instance" {
 
 # Google Cloud SQL-Instanz
 resource "google_sql_database_instance" "postgres-database" {
-  name             = "translator_database"
+  name             = "translator-database"
   database_version = "POSTGRES_15"
 
   settings {

@@ -40,7 +40,7 @@ resource "google_compute_instance" "translator" {
 
     queue_count = 0
     stack_type  = "IPV4_ONLY"
-    subnetwork  = "projects/cc2-translator/regions/europe-west1/subnetworks/default"
+    subnetwork  = "projects/cc2-translator/regions/${local.REGION}/subnetworks/default"
   }
 
   scheduling {
