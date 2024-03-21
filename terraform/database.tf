@@ -19,6 +19,7 @@ data "google_compute_instance" "translator_instance" {
 resource "google_sql_database_instance" "postgres-database" {
   name             = "translator-database"
   database_version = "POSTGRES_15"
+  deletion_protection  = "false"
 
   settings {
     tier = "db-f1-micro"
