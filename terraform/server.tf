@@ -1,7 +1,15 @@
+variable "SSH_KEY_PATH" {
+  type = string
+}
+
 resource "google_compute_instance" "translator" {
   provider = google
   name = "translator-instance"
   machine_type = "e2-micro"
+
+  metadata = {
+    ssh-keys: file("${var.SSH_KEY_PATH}/server.pub")
+  }
 
   boot_disk {
     auto_delete = true
