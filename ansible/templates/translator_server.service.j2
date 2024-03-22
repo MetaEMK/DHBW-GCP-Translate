@@ -1,0 +1,11 @@
+[Unit]
+Description=Translator Server
+After=network.target
+
+[Service]
+ExecStart=/opt/translator/translator
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+

@@ -2,7 +2,6 @@
   hosts: go_app_server
   become: yes
   tasks:
-    # Tasks for Monitoring:
     - name: Install Prometheus Node Exporter
       apt:
         name: prometheus-node-exporter
@@ -15,9 +14,43 @@
         state: directory
 
     - name: Download Translator Server
-      get_url: 
-        url: https://github.com/MetaEMK/DHBW-GCP-Translate/releases/download/testing/dhbw-gcp-translate
-        dest: /opt/translator
+      get_url:
+        url: https://github.com/MetaEMK/DHBW-GCP-Translate/releases/download/testing/translator.zip
+        dest: /tmp/translator
+
+    - name: Install unzip
+      apt:
+        name: unzip
+        state: present
+
+    - name: Unzip Translator Server
+      ansible.builtin.unarchive:
+        src: /tmp/translator
+        dest: /opt
+        remote_src: yes
+      notify: start translator server
+
+    - name: Configure Translator Server Configuration File
+      template:
+        src: config.yaml.j2
+        dest: /opt/translator/config.yaml
+
+
+    - name: Ensure Translator Server is executable
+      ansible.builtin.file:
+        path: /opt/translator/translator
+        mode: '0755'
+
+    - name: Configure Translator Server systemd service
+      template:
+        src: translator_server.service.j2
+        dest: /etc/systemd/system/translator_server.service
+
+    - name: Enable Translator Server service
+      systemd:
+        name: translator_server
+        enabled: yes
+        state: started
 
   handlers:
     - name: restart node exporter
@@ -26,6 +59,11 @@
         state: restarted
 
     - name: start translator server
-      command: /opt/translator/server
-      async: 30
-      poll: 0
+      systemd:
+        name: translator_server
+        state: started
+
+    - name: reload systemd
+      systemd:
+        daemon_reload: yes
+
