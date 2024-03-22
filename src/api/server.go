@@ -5,15 +5,21 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	"github.com/metaemk/dhbw-gcp-translate/config"
 )
 
-func CreateServer() *gin.Engine {
+var templatePath string
+
+func CreateServer(config *config.HttpConfig) *gin.Engine {
     r := gin.New()
     r.Use(gin.Logger())
     r.Use(gin.Recovery())
     r.Use(cors.Default())
 
-    r.LoadHTMLFiles("templates/index.html", "templates/styles.css")
+    basePath := config.TemplatesPath
+    templatePath = basePath
+
+    r.LoadHTMLFiles(basePath + "/index.html", basePath + "/styles.css")
     r.GET("/", getWebsiteHtml)
     r.GET("/styles.css", getWebsiteCss)
 
@@ -30,5 +36,5 @@ func getWebsiteHtml(c *gin.Context) {
 }
 
 func getWebsiteCss(c *gin.Context) {
-    c.File("templates/styles.css")
+    c.File(templatePath + "/styles.css")
 }

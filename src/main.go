@@ -40,6 +40,14 @@ func main() {
 
     fmt.Println("Database connection established")
 
-    r := api.CreateServer()
-    r.Run(":8080")
+
+    fmt.Println("Starting the server")
+    httpConfig, err := config.GetHttpConfig(configPath)
+    if err != nil {
+        fmt.Println("Could not read the http config")
+        panic(err.Error())
+    }
+
+    r := api.CreateServer(&httpConfig)
+    r.Run(fmt.Sprintf(":%d", httpConfig.Port))
 }
