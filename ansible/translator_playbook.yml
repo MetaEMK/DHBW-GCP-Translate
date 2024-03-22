@@ -13,6 +13,11 @@
         path: /opt/translator
         state: directory
 
+    - name: Create Directory
+      ansible.builtin.file:
+        path: /etc/translator
+        state: directory
+
     - name: Download Translator Server
       get_url:
         url: https://github.com/MetaEMK/DHBW-GCP-Translate/releases/download/testing/translator.zip
