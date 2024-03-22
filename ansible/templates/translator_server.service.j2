@@ -3,7 +3,7 @@ Description=Translator Server
 After=network.target
 
 [Service]
-ExecStart=/opt/translator/translator
+ExecStart=/opt/translator/translator -c "/etc/translator/config.yaml"
 Restart=always
 
 [Install]

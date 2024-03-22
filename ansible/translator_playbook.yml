@@ -33,8 +33,7 @@
     - name: Configure Translator Server Configuration File
       template:
         src: config.yaml.j2
-        dest: /opt/translator/config.yaml
-
+        dest: /etc/translator/config.yaml
 
     - name: Ensure Translator Server is executable
       ansible.builtin.file:
