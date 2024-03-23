@@ -68,6 +68,7 @@ func InitDatabase(configPath string) error {
 }
 
 func createTable() error {
+    println("Creating table")
     ctx := context.Background()
     conn, err := getDatabase(ctx)
     if err != nil {
@@ -76,7 +77,7 @@ func createTable() error {
     defer conn.Close()
 
     query := `
-        CREATE TABLE IF NOT EXISTS public.translation (
+        CREATE TABLE IF NOT EXISTS translation (
             id SERIAL,
             insert_time DATE,
             promt_hash TEXT,
@@ -85,6 +86,7 @@ func createTable() error {
         );
     `
     _, err = conn.ExecContext(ctx, query)
+    println("Table created")
 
     return err
 }

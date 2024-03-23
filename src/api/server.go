@@ -22,6 +22,7 @@ func CreateServer(config *config.HttpConfig) *gin.Engine {
     r.LoadHTMLFiles(basePath + "/index.html", basePath + "/styles.css")
     r.GET("/", getWebsiteHtml)
     r.GET("/styles.css", getWebsiteCss)
+    r.GET("/error-handler.js", getWebsiteJs)
 
     apiGroup := r.Group("/api")
     apiGroup.POST("/translate", translateHandler)
@@ -37,4 +38,8 @@ func getWebsiteHtml(c *gin.Context) {
 
 func getWebsiteCss(c *gin.Context) {
     c.File(templatePath + "/styles.css")
+}
+
+func getWebsiteJs(c *gin.Context) {
+    c.File(templatePath + "/error-handler.js")
 }

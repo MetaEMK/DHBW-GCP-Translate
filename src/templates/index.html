@@ -2,26 +2,45 @@
 <html lang="de">
     <head>
         <meta charset="UTF-8">
-        <title>Textübersetzer</title>
+        <title>Übersetzer-WebApp</title>
+        <!-- HTMX einbinden -->
         <script src="https://unpkg.com/htmx.org"></script>
+        <!-- HTMX JSON Encoding Extension -->
         <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
         <link rel="stylesheet" href="styles.css">
+        <script src="/error-handler.js"></script>
     </head>
+
     <body>
         <div class="container">
-            <form hx-post="/api/translate" hx-ext="json-enc" hx-target="#translation" class="translate-form">
-                <textarea name="text" placeholder="Please enter your text"></textarea>
-                
+            <h1>Übersetzer-WebApp</h1>
+
+            <form class="translate-form" hx-post="/api/translate" hx-ext="json-enc" hx-target="#translation" hx-trigger="submit">
+                <div>
+                    <label for="inputText">Text eingeben:</label><br>
+                    <textarea id="inputText" name="text"></textarea>
+                </div>
+
                 <div class="controls">
-                    <select name="targetLanguage">
+                    <label for="targetLanguage">Zielsprache auswählen:</label>
+                    <select id="targetLanguage" name="targetLanguage">
                         <option value="de">Deutsch</option>
-                        <option value="en">English</option>
+                        <option value="en">Englisch</option>
+                        <option value="fr">Französisch</option>
+                        <option value="es">Spanisch</option>
                     </select>
                     <button type="submit">Übersetzen</button>
                 </div>
-                
-                <textarea id="translation" placeholder="Your translation will be here" readonly></textarea>
+
+                <div>
+                    <label>Übersetzung:</label><br>
+                    <textarea id="translation" readonly></textarea>
+                </div>
             </form>
+
+            <div id="error-message" style="color: red; display: none;">
+                <!-- Fehlermeldungen werden hier angezeigt -->
+            </div>
         </div>
     </body>
 </html>
