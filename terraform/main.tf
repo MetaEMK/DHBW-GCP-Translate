@@ -7,6 +7,10 @@ terraform {
   }
 }
 
+variable "SSH_KEY_PATH" {
+  type = string
+}
+
 locals {
   REGION = "europe-north1"
   ZONE   = "europe-north1-a"

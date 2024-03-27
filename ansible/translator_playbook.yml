@@ -37,7 +37,7 @@
 
     - name: Configure Translator Server Configuration File
       template:
-        src: config.yaml.j2
+        src: translator/config.yaml.j2
         dest: /etc/translator/config.yaml
 
     - name: Ensure Translator Server is executable
@@ -47,7 +47,7 @@
 
     - name: Configure Translator Server systemd service
       template:
-        src: translator_server.service.j2
+        src: translator/translator_server.service.j2
         dest: /etc/systemd/system/translator_server.service
 
     - name: Enable Translator Server service

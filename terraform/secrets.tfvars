@@ -4,5 +4,5 @@
 
 DB_NAME = "translator"
 DB_USERNAME = "postgres"
-DB_PASSWORD = "my_password"
+DB_PASSWORD = "your_password"
 SSH_KEY_PATH = "../.ssh"
