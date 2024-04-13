@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #222; /* dunkler Hintergrund wie im Mockup */
+    background-color: #222; 
     padding: 0;
     margin: 0;
     height: 100vh;
@@ -17,22 +17,22 @@ body {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.5);
     display: flex;
-    flex-direction: column; /* Änderung von 'justify-content: space-between' zu 'flex-direction: column' */
-    align-items: center; /* Zentrierung der Elemente */
+    flex-direction: column; 
+    align-items: center; 
 }
 
 .translate-form {
     width: 100%;
     display: grid;
-    grid-template-rows: auto auto auto; /* Layout mit drei Zeilen statt drei Spalten */
-    grid-gap: 20px; /* Platz zwischen den Zeilen */
-    align-items: start; /* Zentrierung der Elemente am Anfang der Zeilen */
+    grid-template-rows: auto auto auto; 
+    grid-gap: 20px; 
+    align-items: start; 
 }
 
 textarea {
-    width: 100%; /* Volle Breite der Spalte */
+    width: 100%; 
     height: 200px;
-    margin: 0; /* Margin auf 0 setzen */
+    margin: 0; 
     padding: 10px;
     border: 1px solid #444;
     background-color: #222;
@@ -45,8 +45,8 @@ textarea {
 .controls {
     display: flex;
     flex-direction: column;
-    align-items: center; /* Zentrierung der Steuerelemente */
-    justify-content: center; /* Vertikale Ausrichtung */
+    align-items: center; 
+    justify-content: center; 
 }
 
 select, button {
@@ -68,7 +68,7 @@ button:hover {
 }
 
 #translation {
-    width: 100%; /* Volle Breite der Spalte */
+    width: 100%; 
     height: 200px;
     padding: 10px;
     border: 1px solid #444;

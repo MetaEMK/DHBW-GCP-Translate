@@ -13,6 +13,5 @@ function addListener() {
 }
 
 htmx.onLoad(function(target) {
-    console.log("Hello World");
     addListener();
 });
