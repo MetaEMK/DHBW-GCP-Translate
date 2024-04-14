@@ -1,7 +1,10 @@
 resource "google_compute_instance" "translator" {
   provider = google
-  name = "translator-instance"
+  count = 3
+
+  name = format("translator-instance-%03d", count.index + 1)
   machine_type = "e2-micro"
+
 
   metadata = {
     ssh-keys: format("jan:%s", file("${var.SSH_KEY_PATH}/translator.pub"))
@@ -34,9 +37,10 @@ resource "google_compute_instance" "translator" {
       network_tier = "PREMIUM"
     }
 
+    network_ip  = "10.1.1.${10 + count.index}"
     queue_count = 0
     stack_type  = "IPV4_ONLY"
-    subnetwork  = "projects/${local.PROJECT}/regions/${local.REGION}/subnetworks/default"
+    subnetwork  = "projects/${local.PROJECT}/regions/${local.REGION}/subnetworks/${google_compute_subnetwork.translator.name}"
   }
 
   scheduling {
@@ -60,6 +64,6 @@ resource "google_compute_instance" "translator" {
   tags = ["http-server", "https-server"]
 }
 
-output "vm_ip" {
-  value = google_compute_instance.translator.network_interface[0].access_config[0].nat_ip
+output "translator_ips" {
+  value = [for instance in google_compute_instance.translator : instance.network_interface[0].network_ip]
 }
