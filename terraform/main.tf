@@ -10,11 +10,16 @@ terraform {
 locals {
   REGION = "europe-north1"
   ZONE   = "europe-north1-a"
+  PROJECT = "cc2-translator"
 }
 
 provider "google" {
-  project = "cc2-translator"
+  project = local.PROJECT
   region  = local.REGION
   zone    = local.ZONE
+}
+
+variable "SSH_KEY_PATH" {
+  type = string
 }
 

@@ -1,0 +1,10 @@
+[Unit]
+Description=Grafana
+
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/sbin/grafana-server --config=/etc/grafana/grafana.ini --homepath=/usr/share/grafana --packaging=deb cfg:default.paths.data=/var/lib/grafana cfg:default.paths.logs=/var/log/grafana cfg:default.paths.plugins=/var/lib/grafana/plugins
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,8 @@
+[Unit]
+Description=Prometheus
+After=network.target
+
+[Service]
+User=root
+Type=simple
+ExecStart=/usr/local/bin/prometheus-2.30.3.linux-amd64/prometheus --config.file=/usr/local/bin/prometheus-2.30.3.linux-amd64/prometheus.yml --storage.tsdb.path=/usr/local/bin/prometheus-2.30.3.linux-amd64/data --web.console.templates=/usr/local/bin/prometheus-2.30.3.linux-amd64/consoles --web.console.libraries=/usr/local/bin/prometheus-2.30.3.linux-amd64

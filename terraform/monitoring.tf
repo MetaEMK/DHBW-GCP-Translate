@@ -1,15 +1,15 @@
-resource "google_compute_instance" "translator" {
+resource "google_compute_instance" "monitoring" {
   provider = google
-  name = "translator-instance"
+  name = "monitoring-instance"
   machine_type = "e2-micro"
 
   metadata = {
-    ssh-keys: format("jan:%s", file("${var.SSH_KEY_PATH}/translator.pub"))
+    ssh-keys: format("jan:%s", file("${var.SSH_KEY_PATH}/monitoring.pub"))
   }
 
   boot_disk {
     auto_delete = true
-    device_name = "translator"
+    device_name = "monitoring"
 
     initialize_params {
       image = "projects/debian-cloud/global/images/debian-12-bookworm-v20240312"
@@ -60,6 +60,6 @@ resource "google_compute_instance" "translator" {
   tags = ["http-server", "https-server"]
 }
 
-output "vm_ip" {
-  value = google_compute_instance.translator.network_interface[0].access_config[0].nat_ip
+output "monitoring_ip" {
+  value = google_compute_instance.monitoring.network_interface[0].access_config[0].nat_ip
 }
