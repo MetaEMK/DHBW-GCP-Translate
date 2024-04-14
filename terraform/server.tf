@@ -41,6 +41,7 @@ resource "google_compute_instance" "translator" {
     queue_count = 0
     stack_type  = "IPV4_ONLY"
     subnetwork  = "projects/${local.PROJECT}/regions/${local.REGION}/subnetworks/${google_compute_subnetwork.translator.name}"
+    #subnetwork = google_compute_subnetwork.translator.self_link
   }
 
   scheduling {
