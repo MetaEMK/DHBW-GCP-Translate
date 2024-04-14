@@ -20,7 +20,7 @@
 
     - name: Download Translator Server
       get_url:
-        url: https://github.com/MetaEMK/DHBW-GCP-Translate/releases/download/testing/translator.zip
+        url: https://github.com/MetaEMK/DHBW-GCP-Translate/releases/download/latest/translator.zip
         dest: /tmp/translator
 
     - name: Install unzip
