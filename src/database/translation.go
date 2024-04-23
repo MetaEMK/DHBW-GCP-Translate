@@ -30,11 +30,11 @@ func GetTranslation(ctx context.Context, request model.TranslateRequest) (transl
     defer result.Close()
 
     for result.Next() {
-        var test string
+        var promt_hash string
         var target_lang string
         var translation_text string
 
-        err = result.Scan(&test, &target_lang, &translation_text)
+        err = result.Scan(&promt_hash, &target_lang, &translation_text)
         if err != nil {
             return 
         }

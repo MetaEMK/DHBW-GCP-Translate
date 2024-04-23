@@ -13,14 +13,13 @@ import (
 func Translate(ctx context.Context, request model.TranslateRequest) (result model.TranslationResult, err error) {
     client := config.GetTranslatorClient(ctx)
 
+    // Check if the translation is already in cache
     result, entryFound, err := database.GetTranslation(ctx, request)
-    if err != nil || entryFound{
-        if entryFound {
-            println("entry found")
-        }
+    if err != nil || entryFound {
         return
     }
 
+    // Translate the text
     translation, err := client.Translate(ctx, []string{request.Text}, request.TargetLanguage, nil)
     if err != nil {
         return
@@ -36,6 +35,7 @@ func Translate(ctx context.Context, request model.TranslateRequest) (result mode
         println("client responded with more than 1 translation")
     }
 
+    // Save the translation to the database
     go database.SaveTranslation(ctx, result)
     return
 }
