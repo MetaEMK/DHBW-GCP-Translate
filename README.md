@@ -29,13 +29,13 @@ ssh-keygen
 ```bash
 cd terraform
 terraform init
-terraform apply -var-file=secrets.tfvars
+terraform apply --var-file=secrets.tfvars
 ```
 
 6. Fill in the correct ip address in the `./ansible/node_inventory.ini` file
 7. Run the following command to deploy the application
 ```bash
 # You may need to adjust the private key path
-ansible-playbook -i node_inventory.ini --private-key ../.ssh/translator translator_playbook.yml
-ansible-playbook -i node_inventory.ini --private-key ../.ssh/monitoring monitoring_playbook.yml
+ansible-playbook -i node_inventory.ini
+ansible-playbook -i node_inventory.ini
 ```
